@@ -1,0 +1,50 @@
+
+lua与c++的交互
+1、在c++中执行lua脚本
+
+-- Simple Hello World Lua program
+print('Hello World!')
+
+在c++中执行lua程序的步骤：
+1、建立lua解释器对象
+2、加载执行lua代码需要的库
+3、读入lua程序或者预先编译后的lua程序
+4、执行读入的lua程序
+5、关闭lua解释器
+
+c++代码
+#include<iostream>
+#include "/home/niejinci/whillysnie/capi/luajit/include/luajit-2.1/lua.hpp"
+
+using namespace std;
+
+int main()
+{
+        lua_State * L;
+
+        //create new lua state
+        L = luaL_newstate();
+        if (L == NULL)
+        {
+                cout << "create new lua state  fail\n";
+                return 1;
+        }
+
+        //Opens all standard Lua libraries into the given state.
+        luaL_openlibs(L);
+
+        //load lua script
+        if (luaL_dofile(L, "helloworld.lua"))
+        {
+                cout << "run lua script fail\n";
+                return 2;
+        }
+
+        //close lua state
+        lua_close(L);
+
+        return 0;
+}
+
+//编译链接
+//g++ ccalllua.cpp -L /home/niejinci/whillysnie/capi/luajit/lib -lluajit-5.1 
