@@ -1,4 +1,8 @@
 
+
+lua5.1参考手册
+http://www.codingnow.com/2000/download/lua_manual.html
+
 lua与c++的交互
 1、在c++中执行lua脚本
 
